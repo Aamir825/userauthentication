@@ -7,30 +7,32 @@ import OTPForm from "./components/OTPForm/OTPForm"
 import Home from "./pages/Home/Home"
 import Login from "./pages/Login/Login"
 import Signup from "./pages/Signup/Signup"
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute"
+import { ToastContainer } from "react-toastify"
 
 function App() {
 
   const routes = createBrowserRouter([
     {
+      path: "login",
+      element: <Login />
+    },
+    {
+      path: "signup",
+      element: <Signup />
+    },
+    {
+      path: "OTPForm",
+      element: <OTPForm />
+    },
+    {
       path: "/",
-      element: <Layout/>,
+      element: <ProtectedRoute><Layout /></ProtectedRoute>,
       children: [
         {
           path: "",
-          element: <Home/>
+          element: <Home />
         },
-        {
-          path: "login",
-          element: <Login/>
-        },
-        {
-          path: "signup",
-          element: <Signup/>
-        },
-        {
-          path: "OTPForm",
-          element: <OTPForm/>
-        }
       ]
     }
   ])
@@ -38,6 +40,7 @@ function App() {
   return (
     <>
       <RouterProvider router={routes}></RouterProvider>
+      <ToastContainer/>
     </>
   )
 }

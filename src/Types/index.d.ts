@@ -13,7 +13,8 @@ export interface AuthFormProps{
     fields: AuthField[]
     onSubmit: (e?: React.BaseSyntheticEvent) => void
     googlebtn?: React.ReactNode
-    buttonText: string
+    buttonText: string,
+    loading: boolean
     register: UseFormRegister<T>
     errors: FieldErrors<T>
 }

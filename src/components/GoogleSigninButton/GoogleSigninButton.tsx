@@ -1,4 +1,5 @@
 import { useSignIn } from "@clerk/clerk-react"
+import { toast } from "react-toastify";
 
 const GoogleSigninButtons = () => {
   const { signIn } = useSignIn();
@@ -10,6 +11,7 @@ const GoogleSigninButtons = () => {
         redirectUrl: "/", // your redirect after success
         redirectUrlComplete: "/", // optional fallback
       });
+      toast.success("Login Successfully!");
     } catch (err) {
       console.error("Google sign-in error:", err);
     }

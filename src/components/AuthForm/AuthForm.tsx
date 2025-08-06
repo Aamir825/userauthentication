@@ -1,7 +1,8 @@
 import type React from "react"
 import type { AuthFormProps } from '../../Types'
+import Loader from "../Loader/Loader"
 
-const AuthForm: React.FC<AuthFormProps> = ({title, fields, onSubmit, buttonText, googlebtn, register, errors }) => { 
+const AuthForm: React.FC<AuthFormProps> = ({title, fields, onSubmit, buttonText, googlebtn, register, errors, loading }) => { 
   return (
     <div className=" bg-white px-4 py-10 rounded-lg w-sm shadow-md border-t-6 border-gray-300">
       <form onSubmit={onSubmit}> 
@@ -27,7 +28,7 @@ const AuthForm: React.FC<AuthFormProps> = ({title, fields, onSubmit, buttonText,
           <p className="text-center text-gray-400">——— or ———</p>
           {googlebtn}
         </div>
-        <button type="submit" className=" w-full py-2 px-12 border-none bg-blue-600 text-white mt-2 cursor-pointer">{buttonText}</button>
+        <button disabled={loading} type="submit" className=" w-full py-2 px-12 border-none bg-blue-600 text-white mt-2 cursor-pointer flex justify-center items-center gap-4">{buttonText} {loading && <Loader/>}</button>
       </form> 
     </div> 
   )
