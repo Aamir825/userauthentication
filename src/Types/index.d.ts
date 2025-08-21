@@ -1,9 +1,11 @@
+import type { ReactNode } from "react"
 import type { FieldErrors, UseFormRegister } from "react-hook-form"
 
 export interface AuthField{
     label: string
     type: string
     name: string
+    icon: ReactNode
     placeholder?: string
     required?: boolean
 }
@@ -13,7 +15,8 @@ export interface AuthFormProps{
     fields: AuthField[]
     onSubmit: (e?: React.BaseSyntheticEvent) => void
     googlebtn?: React.ReactNode
-    buttonText: string,
+    buttonText: string
+    accLink: ReactNode
     loading: boolean
     register: UseFormRegister<T>
     errors: FieldErrors<T>

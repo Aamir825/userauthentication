@@ -5,9 +5,12 @@ import { useForm } from "react-hook-form"
 import { SignupSchema, type SignupSchemaType } from "../../schemas/SignupSchema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useSignUp } from "@clerk/clerk-react"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { toast } from "react-toastify"
+import { LuUserRound } from "react-icons/lu"
+import { CiUnlock } from "react-icons/ci"
+import { HiOutlineMail } from "react-icons/hi"
 
 const Signup = () => {
 
@@ -42,15 +45,15 @@ const Signup = () => {
   };
 
   const fields: AuthField[] = [
-    { label: "username", name: "username", type: "text" },
-    { label: "email", name: "email", type: "email" },
-    { label: "password", name: "password", type: "password" },
-    { label: "confirmPassword", name: "confirmPassword", type: "password" }
+    { label: "username", name: "username", placeholder: "username", icon: <LuUserRound/>, type: "text" },
+    { label: "email", name: "email", placeholder: "email", icon: <HiOutlineMail/>, type: "email" },
+    { label: "password", name: "password", placeholder: "password", icon: <CiUnlock/>, type: "password" },
+    { label: "confirmPassword", name: "confirmPassword", placeholder: "confirm password", icon: <CiUnlock/>, type: "password" }
   ]
 
   return (
-    <div className=" flex justify-center items-center h-screen">
-      <AuthForm title="Signup Form" fields={fields} onSubmit={handleSubmit(handleSignup)} register={register} errors={errors} buttonText="Signup" loading={loading} googlebtn={<GoogleSigninButtons />} />
+    <div className=" flex justify-center items-center h-screen bg-[#fcfcfc]">
+      <AuthForm title="Signup Form" fields={fields} onSubmit={handleSubmit(handleSignup)} register={register} errors={errors} buttonText="Signup" loading={loading} googlebtn={<GoogleSigninButtons />} accLink={<>Don't have an account? <Link to="/login" className="text-blue-500">Signin</Link></>}/>
     </div>
   )
 }

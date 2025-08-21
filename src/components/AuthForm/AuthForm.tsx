@@ -2,21 +2,22 @@ import type React from "react"
 import type { AuthFormProps } from '../../Types'
 import Loader from "../Loader/Loader"
 
-const AuthForm: React.FC<AuthFormProps> = ({title, fields, onSubmit, buttonText, googlebtn, register, errors, loading }) => { 
+const AuthForm: React.FC<AuthFormProps> = ({title, fields, onSubmit, buttonText, googlebtn, register, errors, loading, accLink }) => { 
   return (
     <div className=" bg-white px-4 py-10 rounded-lg w-sm shadow-md border-t-6 border-gray-300">
       <form onSubmit={onSubmit}> 
         <h2 className=" text-lg font-bold mb-2">{title}</h2>
         {fields.map((fields, index)=> ( 
-          <div key={index} className=" flex flex-col">
-            <label className=" text-gray-500 text-sm -tracking-tighter ">{fields.label}</label> 
+          <div key={index} className=" flex flex-col relative">
+            {/* <label className=" text-gray-500 text-sm -tracking-tighter ">{fields.label}</label>  */}
             <input 
               type={fields.type}
               {...register(fields.name)}
               placeholder={fields.placeholder}
               required={fields.required}
-              className=" py-1 px-2 outline-none border border-gray-300 rounded-md mb-3"
+              className=" py-2 pl-10 pr-2 outline-none border border-gray-300 rounded-md mb-3"
             /> 
+            <p className=" absolute top-2 left-2 bg-gray-100 p-1 rounded-full shadow-md">{fields.icon}</p>
             {errors?.[fields.name] && (
               <p className="text-sm text-red-500">
                 {errors[fields.name]?.message as string}
@@ -29,6 +30,7 @@ const AuthForm: React.FC<AuthFormProps> = ({title, fields, onSubmit, buttonText,
           {googlebtn}
         </div>
         <button disabled={loading} type="submit" className=" w-full py-2 px-12 border-none bg-blue-600 text-white mt-2 cursor-pointer flex justify-center items-center gap-4">{buttonText} {loading && <Loader/>}</button>
+        <p className=" text-center text-xs mt-3">{accLink}</p>
       </form> 
     </div> 
   )

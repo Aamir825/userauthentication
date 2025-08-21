@@ -6,9 +6,11 @@ import { LoginSchema } from "../../schemas/LoginSchema";
 import type { LoginSchemaType } from "../../schemas/LoginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSignIn } from "@clerk/clerk-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { LuUserRound } from "react-icons/lu";
+import { CiUnlock } from "react-icons/ci";
 
 const Login = () => {
 
@@ -19,8 +21,8 @@ const Login = () => {
   const navigate = useNavigate();
 
   const fields: AuthField[] = [
-    { label: "username", name: "email", type: "text", },
-    { label: "password", name: "password", type: "password", }
+    { label: "username", name: "email", placeholder: "username", icon: <LuUserRound/>, type: "text", },
+    { label: "password", name: "password", placeholder: "password", icon: <CiUnlock/>, type: "password", }
   ]
 
   const handleLogin = async(data: LoginSchemaType) => {
@@ -49,8 +51,8 @@ const Login = () => {
   }
   
   return (
-    <div className=" flex justify-center items-center h-screen">
-      <AuthForm title="Login Form" fields={fields} onSubmit={handleSubmit(handleLogin)} register={register} errors={errors} buttonText="Login" loading={loading} googlebtn={<GoogleSigninButtons/>}/>
+    <div className=" flex justify-center items-center h-screen bg-[#fcfcfc]">
+      <AuthForm title="Login Form" fields={fields} onSubmit={handleSubmit(handleLogin)} register={register} errors={errors} buttonText="Login" loading={loading} googlebtn={<GoogleSigninButtons/>} accLink={<>Don't have an account? <Link to="/signup" className="text-blue-500 font-bold">Signup</Link></>}/>
     </div>
   )
 }
